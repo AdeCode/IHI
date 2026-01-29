@@ -69,13 +69,6 @@ export function Footer() {
 
           {/* Quick Links */}
           <div className="md:w-8/12">
-            {/* <h4 className="font-display font-bold text-lg mb-6 text-white">Explore</h4> */}
-            {/* <ul className="text-base font-medium text-white flex items-center gap-5">
-              <li><Link href="/our-story" className="transition-colors pb-3 hover:border-b border-gray-500">Our Story</Link></li>
-              <li><Link href="/meet-the-team" className="transition-colors pb-3 hover:border-b border-gray-500">Meet the Team</Link></li>
-              <li><Link href="/programs" className="transition-colors pb-3 hover:border-b border-gray-500">Programs</Link></li>
-              <li><Link href="/contact-us" className="transition-colors pb-3 hover:border-b border-gray-500">Contact Us</Link></li>
-            </ul> */}
             <div className="hidden md:flex items-center space-x-10 mb-5">
               {navLinks.map((link) => {
                 const isActive =
@@ -95,7 +88,7 @@ export function Footer() {
                           // show underline when group hovered
                           "group-hover:after:scale-x-100",
                           // show underline when active
-                          isActive && "after:scale-x-100 after:bg-primary",
+                          isActive && "after:scale-x-100 after:bg-gray-800",
                           // default underline color
                           !isActive && "after:bg-gray-800"
                         )}
