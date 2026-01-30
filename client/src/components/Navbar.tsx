@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 // import {navLinks} from "../constants/common";
@@ -9,6 +9,8 @@ export function Navbar() {
   const [location] = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -187,9 +189,9 @@ export function Navbar() {
         </div>
       )} */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-background border-b shadow-xl animate-in slide-in-from-top-5 rounded-2xl">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-background border-b shadow-xl animate-in slide-in-from-top-5 rounded-[32px]">
           <div className="flex flex-col py-4 space-y-4">
-            {navLinks.map((link) => {
+            {/* {navLinks.map((link) => {
               const path =
                 link.href ??
                 link.subMenu?.[0]?.href; // fallback for dropdown parents
@@ -210,6 +212,67 @@ export function Navbar() {
                 >
                   {link.label}
                 </Link>
+              );
+            })} */}
+            {navLinks.map((link) => {
+              const hasSubMenu = !!link.subMenu?.length;
+              const isOpen = openSubMenu === link.label;
+
+              return (
+                <div key={link.label} className="flex flex-col">
+                  {/* Parent item */}
+                  {hasSubMenu ? (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setOpenSubMenu(isOpen ? null : link.label)
+                      }
+                      className="flex items-center justify-center gap-5 text-base font-bold px-2 py-3 rounded-md hover:bg-muted transition-colors text-foreground"
+                    >
+                      <span>{link.label}</span>
+
+                      <ChevronDown
+                        className={cn(
+                          "w-5 h-5 transition-transform duration-300",
+                          isOpen && "rotate-180"
+                        )}
+                      />
+                    </button>
+                  ) : (
+                    <Link
+                      to={link.href!}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={cn(
+                        "text-base font-bold px-2 py-3 rounded-md hover:bg-muted transition-colors text-center",
+                        location === link.href
+                          ? "text-black bg-[#EDEFF2] rounded-t-2xl"
+                          : "text-foreground"
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  )}
+
+                  {/* Submenu */}
+                  {hasSubMenu && isOpen && (
+                    <div className="mt-2 flex flex-col space-y-2 border-l border-muted">
+                      {link.subMenu!.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          to={sub.href}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className={cn(
+                            "text-base font-bold px-2 py-2 hover:bg-muted transition-colors text-center rounded-3xl",
+                            location === sub.href
+                            && " bg-muted"
+                          )}
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
               );
             })}
 
