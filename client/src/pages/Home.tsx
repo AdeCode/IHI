@@ -2,7 +2,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Users, Briefcase, Globe, ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -19,15 +20,31 @@ const staggerContainer = {
   }
 };
 
-const words = [
-  { text: "innovation.", className: "text-[#1C395C] bg-clip-text bg-gradient-to-r from-primary to-accent" },
-  { text: "connection.", className: "text-[#1C395C]" },
-  { text: "collaboration.", className: "text-[#1C395C]" },
-  { text: "Impact Makers.", className: "text-[#1C395C]" },
-];
+
+// const words = [
+//   { text: "innovation.", className: "text-[#1C395C] bg-clip-text bg-gradient-to-r from-primary to-accent" },
+//   { text: "connection.", className: "text-[#1C395C]" },
+//   { text: "collaboration.", className: "text-[#1C395C]" },
+//   { text: "Impact Makers.", className: "text-[#1C395C]" },
+// ];
 
 export default function Home() {
   const [index, setIndex] = useState(0);
+  const { t } = useTranslation();
+
+  // Pull array from translation file
+  const translatedWords = t("animatedWords", { returnObjects: true }) as string[];
+
+  // Rebuild words array dynamically
+  const words = useMemo(
+    () =>
+      translatedWords.map((word) => ({
+        text: word,
+        className:
+          "text-[#1C395C] bg-clip-text bg-gradient-to-r from-primary to-accent",
+      })),
+    [translatedWords]
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -60,6 +77,8 @@ export default function Home() {
   };
 
 
+
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -83,7 +102,8 @@ export default function Home() {
             className="space-y-8"
           >
             <h1 className="font-poppins text-5xl md:text-7xl font-bold text-black leading-tight">
-              Our world needs more<br />
+              {/* Our world needs more<br /> */}
+              {t("hero_title")}<br />
 
               <div className="relative h-[1.2em] overflow-hidden flex justify-center">
                 <AnimatePresence mode="wait">
@@ -113,7 +133,7 @@ export default function Home() {
             </h1>
 
             <motion.p variants={fadeIn} className="text-xl text-black max-w-2xl mx-auto">
-              We make it happen in Ibadan.
+              {t("hero_subtitle")}
             </motion.p>
 
             {/* <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
@@ -136,9 +156,10 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 px-5 md:px-8">
           <div className="flex items-center md:pl-20 py-5 md:py-20">
             <h2 className="text-white text-[26px] md:text-3xl font-medium font-poppins">
-            We are Impact Hub Ibadan, an entreprenuership hub inspiring, connecting, 
+            {/* We are Impact Hub Ibadan, an entreprenuership hub inspiring, connecting, 
             and enabling entrepreneurs 
-            to grow and scale sustainable solutions that make a positive impact.
+            to grow and scale sustainable solutions that make a positive impact. */}
+              {t("who_we_are")}
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 md:px-8">

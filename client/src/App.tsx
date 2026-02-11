@@ -16,6 +16,7 @@ import NotFound from "@/pages/not-found";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import ImpactBrochure from "./pages/ImpactBrochure";
+import LanguageSwitch from "./components/LanguageSwitch";
 
 function ScrollToTop() {
   const [pathname] = useLocation();
@@ -44,13 +45,30 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <div className="flex flex-col min-h-screen font-sans bg-background text-foreground">
+        {/* <div className="flex flex-col min-h-screen font-sans bg-background text-foreground">
           <ScrollToTop />
           <Navbar />
           <main className="flex-grow pt-16 md:pt-20">
             <Router />
           </main>
           <Footer />
+        </div> */}
+        <div className="relative flex flex-col min-h-screen font-sans bg-background text-foreground">
+
+          <ScrollToTop />
+          <Navbar />
+
+          <main className="flex-grow pt-16 md:pt-20">
+            <Router />
+          </main>
+
+          <Footer />
+
+          {/*Floating Language Switcher */}
+          <div className="fixed bottom-6 left-6 z-50">
+            <LanguageSwitch />
+          </div>
+
         </div>
         <Toaster />
       </TooltipProvider>
