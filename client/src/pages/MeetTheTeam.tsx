@@ -1,47 +1,50 @@
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Search } from "lucide-react";
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-const team = [
-  {
-    name: "Adebayo Olubobokun",
-    role: "MD/CEO",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80"
-  },
-  {
-    name: "Omowumi Helen Oduyemi",
-    role: "Chief Trade Officer",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80"
-  },
-  {
-    name: "Gloria Okoye",
-    role: "Program Lead",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80"
-  },
-  {
-    name: "Banke Adeoye",
-    role: "Space Lead",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80"
-  },
-  {
-    name: "Jesus Alleluyanatha-Anozia",
-    role: "Social Media Manager",
-    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80"
-  },
-  {
-    name: "Karina Karunwi",
-    role: "Service Delivery",
-    image: "https://images.unsplash.com/photo-1598550874175-4d7112ee7f43?auto=format&fit=crop&q=80"
-  },
-  {
-    name: "Stella Ashi",
-    role: "Community Host",
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80"
-  }
-];
 
 export default function MeetTheTeam() {
   const [query, setQuery] = useState("");
+  const { t } = useTranslation();
+
+  const team = [
+    {
+      name: "Adebayo Afure Olubobokun",
+      role: t('md'),
+      image: '/images/sun.jpeg'
+    },
+    {
+      name: "Omowumi Helen Oduyemi",
+      role: t('cto'),
+      image: "/images/helen.jpeg"
+    },
+    {
+      name: "Oluwafemi Oluwadurotimi Popoola",
+      role: t('coo'),
+      image: "/images/femi.jpeg"
+    },
+    {
+      name: "Cynthia Abagwe",
+      role: t('space'),
+      image: "/images/cynthia.jpeg"
+    },
+    {
+      name: "Agoro Habeeb Adekorede",
+      role: t('ict'),
+      image: "/images/ade.jpeg"
+    },
+    {
+      name: "Olalekan Sarafa Idris",
+      role: t('brand'),
+      image: "/images/lekan.jpeg"
+    },
+    {
+      name: "Oladapo Akanji",
+      role: t('finance'),
+      image: "/images/dap.jpeg"
+    }
+  ];
 
   const filteredTeam = useMemo(() => {
     return team.filter(member =>
@@ -58,7 +61,7 @@ export default function MeetTheTeam() {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-[4.8vw] leading-[1.1em] font-poppins font-bold mb-6 text-[#EDEFF2]"
           >
-            Meet the team
+            {t("meet_team")}
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -66,7 +69,7 @@ export default function MeetTheTeam() {
             transition={{ delay: 0.1 }}
             className="text-base w-8/12 md:max-w-3xl text-white"
           >
-            Our skills and personalities are as diverse as our locations, yet we are united by our common commitment to support the growth and well-being of our community in Ibadan.
+            {t("meet_team_skills")}
           </motion.p>
         </div>
       </section>
@@ -77,7 +80,7 @@ export default function MeetTheTeam() {
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />
           <input
             type="text"
-            placeholder="I'm looking for..."
+            placeholder={t("look_for")}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className="w-full rounded-full bg-slate-100 pl-12 pr-6 py-4
@@ -89,7 +92,7 @@ export default function MeetTheTeam() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {filteredTeam.length === 0 && (
             <p className="col-span-full text-center text-muted-foreground text-lg">
-              No team member found
+              {t("member_not_found")}
             </p>
           )}
           {filteredTeam.map((member, index) => (
@@ -119,8 +122,8 @@ export default function MeetTheTeam() {
                   </button>
                 </div>
               </div>
-              <h3 className="text-xl font-bold font-display text-slate-900 group-hover:text-primary transition-colors">{member.name}</h3>
-              <p className="text-muted-foreground font-medium">{member.role}</p>
+              <h3 className="text-xl font-bold font-display font-poppins text-slate-900 group-hover:text-primary transition-colors">{member.name}</h3>
+              <p className="text-muted-foreground font-medium font-poppins">{member.role}</p>
             </motion.div>
           ))}
         </div>

@@ -53,8 +53,8 @@ export function Navbar() {
       <div className="max-w-7xl lg:max-w-full mx-auto px-4 sm:px-6 lg:px-14">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link href="/" className="flex gap-2 group">
-            <div className="h-9 md:h-16 pt-2 md:pt-4 bg-[#750000] px-3 flex flex-col justify-center items-center text-white font-bold shadow-lg transition-transform">
+          <Link href="/" className="flex">
+            {/* <div className="h-9 md:h-16 pt-2 md:pt-4 bg-[#750000] px-3 flex flex-col justify-center items-center text-white font-bold shadow-lg transition-transform">
               <span className="text-[6px] md:text-xs leading-none">IMPACT</span>
               <span className="text-xs md:text-2xl leading-none">HUB</span>
             </div>
@@ -62,7 +62,8 @@ export function Navbar() {
               <span className="font-display font-bold text-sm md:text-3xl leading-none text-foreground">
                 Ibadan
               </span>
-            </div>
+            </div> */}
+            <img src='/images/ihi_logo.png' alt='logo' className="w-[35px] h-[16px] md:w-[141px] md:h-[67px]"/>
           </Link>
 
           {/* Desktop Nav */}
